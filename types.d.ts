@@ -1,6 +1,6 @@
 type Blog = {
   id: string;
-  blogTItle: string;
+  blogTitle: string;
   blogContent: string;
   userId: string;
   createdBy: User;

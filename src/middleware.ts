@@ -13,10 +13,14 @@ export async function middleware(req: NextRequest) {
 
   console.log(session);
 
+  if (session && path.endsWith("/")) {
+    return NextResponse.redirect(new URL("/home", req.nextUrl));
+  }
+
   if (!session && path !== "/auth/login") {
-    return NextResponse.redirect(new URL("/auth/login", req.url));
+    return NextResponse.redirect(new URL("/auth/login", req.nextUrl));
   } else if (session && (path === "/auth/login" || path === "/signup")) {
-    return NextResponse.redirect(new URL("/", req.url));
+    return NextResponse.redirect(new URL("/home", req.nextUrl));
   }
   return NextResponse.next();
 }

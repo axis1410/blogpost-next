@@ -24,7 +24,7 @@ model Blog {
   blogTitle   String
   blogContent String
   date        DateTime @default(now())
-  editedData  DateTime @default(now())
+  editedDate  DateTime @updatedAt
   createdBy   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String   @db.ObjectId
 }
