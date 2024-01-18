@@ -6,6 +6,8 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   try {
     const id = params.id;
 
+    console.log(req);
+
     await connectToDb();
 
     const blog = await prisma.blog.findFirst({

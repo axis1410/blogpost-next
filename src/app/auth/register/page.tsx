@@ -1,40 +1,30 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>("");
   const [data, setData] = useState({
+    name: "",
+    username: "",
     email: "",
     password: "",
   });
 
-  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
+  const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setSubmitting(true);
+    try {
+      const res = await axios.post("/api/auth/register", data);
 
-    const res = await signIn("credentials", {
-      redirect: false,
-      email: data.email,
-      password: data.password,
-      callbackUrl: `${window.location.origin}`,
-    });
-
-    if (res?.error) {
-      setError(error);
-    } else {
-      setError(null);
+      console.log(res.data);
+      router.push("/auth/login");
+    } catch (error) {
+      console.log(error);
     }
-
-    if (res?.url) router.push(res?.url);
-
-    setSubmitting(false);
   };
 
   return (
@@ -42,40 +32,52 @@ export default function LoginPage() {
       <div className="bg-grey-lighter min-h-screen flex flex-col">
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
           <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-            <h1 className="mb-8 text-3xl text-center">Login</h1>
-            <form onSubmit={handleLogin}>
+            <h1 className="mb-8 text-3xl text-center">Sign up</h1>
+            <form onSubmit={handleRegister}>
+              <input
+                type="text"
+                className="block border border-grey-light w-full p-3 rounded mb-4"
+                value={data.name}
+                onChange={(e) => setData({ ...data, name: e.target.value })}
+                placeholder="Full Name"
+              />
+              <input
+                type="text"
+                className="block border border-grey-light w-full p-3 rounded mb-4"
+                value={data.username}
+                onChange={(e) => setData({ ...data, username: e.target.value })}
+                placeholder="Userame"
+              />
               <input
                 type="text"
                 className="block border border-grey-light w-full p-3 rounded mb-4"
                 value={data.email}
-                disabled={submitting}
                 onChange={(e) => setData({ ...data, email: e.target.value })}
                 placeholder="Email"
               />
+
               <input
                 type="password"
                 className="block border border-grey-light w-full p-3 rounded mb-4"
                 value={data.password}
-                disabled={submitting}
                 onChange={(e) => setData({ ...data, password: e.target.value })}
                 placeholder="Password"
               />
               <button
                 type="submit"
-                disabled={submitting}
-                className="w-full text-center py-3 rounded bg-green text-white
+                className="w-full text-center py-3 rounded text-white
                 bg-green-500 hover:bg-green-400 focus:outline-none my-1"
               >
-                Login
+                Create Account
               </button>
             </form>
-            {error && <p>{error}</p>}
           </div>
 
           <div className="text-grey-dark mt-6">
-            New user?{" "}
+            Already have an account?
             <Link className="no-underline border-b border-blue-600 text-blue-600" href={"/login"}>
-              Create account.
+              {" "}
+              Log in
             </Link>
             .
           </div>

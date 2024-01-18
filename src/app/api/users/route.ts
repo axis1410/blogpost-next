@@ -1,6 +1,8 @@
 import prisma from "@/prisma";
 import { connectToDb } from "@/utils/connectToDb";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { authOptions } from "../auth/[...nextauth]/authOptions";
 
 export async function GET() {
   try {
