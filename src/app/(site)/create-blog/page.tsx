@@ -37,7 +37,7 @@ export default function CreateBlogPage() {
   return (
     <>
       <div className="flex items-center justify-center min-h-screen">
-        <div className="p-8 rounded border border-gray-200">
+        <div className="p-8 rounded border w-[720px] border-gray-200">
           <h1 className="font-medium text-3xl">Create Blog</h1>
           <p className="text-gray-600 mt-6">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quidem excepturi blanditiis
@@ -73,14 +73,14 @@ export default function CreateBlogPage() {
             <div className="space-x-4 mt-8">
               <button
                 type="submit"
-                className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600
+                className="py-2 transition duration-100 px-4 bg-blue-500 text-white rounded hover:bg-blue-600
                 active:bg-blue-700 disabled:opacity-50"
               >
                 Create
               </button>
               <button
                 type="button"
-                className="py-2 px-4 bg-white border border-gray-200 text-gray-600
+                className="py-2 transition duration-100 px-4 bg-white border border-gray-200 text-gray-600
                rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50"
                 onClick={() => router.push("/")}
               >

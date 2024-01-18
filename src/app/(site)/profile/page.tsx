@@ -19,6 +19,7 @@ export default function ProfilePage() {
     queryKey: ["blogs"],
     queryFn: () => getAllBlogs(),
     refetchOnWindowFocus: "always",
+    refetchOnMount: "always",
     refetchInterval: 30000,
   });
 
@@ -42,7 +43,7 @@ export default function ProfilePage() {
       {userBlogs && (
         <>
           {userBlogs.map((blog: Blog) => (
-            <Link href={`/blog/${blog.id}`}>
+            <Link key={blog.id} href={`/blog/${blog.id}`}>
               <h1>{blog.blogTitle}</h1>
               <p>{blog.blogContent}</p>
               <hr />
@@ -50,6 +51,7 @@ export default function ProfilePage() {
           ))}
         </>
       )}
+      <Link href={"/"}>Go to homepage</Link>
     </div>
   );
 }
