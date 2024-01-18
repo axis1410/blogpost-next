@@ -19,22 +19,18 @@ export default function LoginPage() {
 
     setSubmitting(true);
 
-    const res = await signIn("credentials", {
+    await signIn("credentials", {
       redirect: false,
       email: data.email,
       password: data.password,
       callbackUrl: `${window.location.origin}`,
-    });
-
-    if (res?.error) {
-      setError(error);
-    } else {
-      setError(null);
-    }
-
-    if (res?.url) router.push(res?.url);
-
-    setSubmitting(false);
+    })
+      .then((res) => {
+        if (res?.error) setError(res.error);
+        else window.location.replace("/");
+      })
+      .catch((err) => setError(err))
+      .finally(() => setSubmitting(false));
   };
 
   return (

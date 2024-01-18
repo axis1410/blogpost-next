@@ -40,7 +40,7 @@ export default function ProfilePage() {
     <div>
       Profile Page
       {userId && <h4>Logged in as {session?.data?.user?.name}</h4>}
-      {userBlogs && (
+      {userBlogs ? (
         <>
           {userBlogs.map((blog: Blog) => (
             <Link key={blog.id} href={`/blog/${blog.id}`}>
@@ -50,6 +50,8 @@ export default function ProfilePage() {
             </Link>
           ))}
         </>
+      ) : (
+        <>No blogs yet</>
       )}
       <Link href={"/"}>Go to homepage</Link>
     </div>

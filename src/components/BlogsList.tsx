@@ -12,6 +12,8 @@ const BlogsList = () => {
     queryKey: ["blogs"],
     queryFn: getAllBlogs,
     refetchOnWindowFocus: "always",
+    refetchOnMount: "always",
+    refetchInterval: 60000,
   });
 
   const { setBlogData } = useContext(BlogContext);
