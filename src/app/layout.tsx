@@ -1,5 +1,6 @@
 import AuthProvider from "@/Providers/AuthProvider";
 import ReactQueryProvider from "@/Providers/ReactQueryProvider";
+import { BlogContextProvider } from "@/Providers/context/BlogContext";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -17,7 +18,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={inter.className}>
         <main>
           <ReactQueryProvider>
-            <AuthProvider>{children}</AuthProvider>
+            <AuthProvider>
+              <BlogContextProvider>{children}</BlogContextProvider>
+            </AuthProvider>
           </ReactQueryProvider>
         </main>
       </body>

@@ -4,9 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const { blogTitle, blogContent, email } = await request.json();
+    const { blogTitle, blogContent, userId } = await request.json();
 
-    if (!blogTitle || !blogContent || !email) {
+    if (!blogTitle || !blogContent || !userId) {
       return NextResponse.json({ message: "Invalid Data" }, { status: 422 });
     }
 
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
 
     const existingUser = await prisma.user.findFirst({
       where: {
-        email,
+        id: userId,
       },
     });
 

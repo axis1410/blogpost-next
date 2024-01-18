@@ -63,8 +63,8 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full text-center py-3 rounded bg-green text-white
-                bg-green-500 hover:bg-green-400 focus:outline-none my-1"
+                className="w-full text-center py-3 rounded bg-slate text-white
+                bg-slate-900 hover:bg-slate-700 transition duration-100 focus:outline-none my-1"
               >
                 Login
               </button>
@@ -74,10 +74,12 @@ export default function LoginPage() {
 
           <div className="text-grey-dark mt-6">
             New user?{" "}
-            <Link className="no-underline border-b border-blue-600 text-blue-600" href={"/login"}>
+            <Link
+              className="no-underline border-b border-blue-600 text-blue-600"
+              href={"/auth/register"}
+            >
               Create account.
             </Link>
-            .
           </div>
         </div>
       </div>

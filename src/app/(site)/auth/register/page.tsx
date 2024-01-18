@@ -66,7 +66,7 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 className="w-full text-center py-3 rounded text-white
-                bg-green-500 hover:bg-green-400 focus:outline-none my-1"
+                bg-indigo-500 hover:bg-indigo-400 transition duration-100 focus:outline-none my-1"
               >
                 Create Account
               </button>
@@ -74,12 +74,13 @@ export default function RegisterPage() {
           </div>
 
           <div className="text-grey-dark mt-6">
-            Already have an account?
-            <Link className="no-underline border-b border-blue-600 text-blue-600" href={"/login"}>
-              {" "}
-              Log in
+            Already have an account?{" "}
+            <Link
+              className="no-underline border-b border-blue-600 text-blue-600"
+              href={"/auth/login"}
+            >
+              Log in.
             </Link>
-            .
           </div>
         </div>
       </div>

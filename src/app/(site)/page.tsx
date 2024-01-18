@@ -5,7 +5,7 @@ import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { authOptions } from "../api/auth/[...nextauth]/authOptions";
+import { authOptions } from "../(api)/api/auth/[...nextauth]/authOptions";
 
 export default async function HomePage() {
   const queryClient = new QueryClient();
@@ -29,6 +29,10 @@ export default async function HomePage() {
       <HydrationBoundary state={dehydrate(queryClient)}>
         <BlogsList />
       </HydrationBoundary>
+      <br />
+      <Link href="/profile">View profile</Link>
+      <br />
+      <Link href="/create-blog">Create blog</Link>
       <br />
       <LogoutButton />
       <Link href="/api/auth/signin">Sign in</Link>
