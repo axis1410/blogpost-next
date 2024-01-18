@@ -28,7 +28,6 @@ const BlogsList = () => {
     <div>
       BlogsList
       <ul>
-
         <BlogItem blogs={blogs} />
       </ul>
     </div>
