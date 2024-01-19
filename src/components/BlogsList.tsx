@@ -1,10 +1,7 @@
 "use client";
 
-import { BlogContext } from "@/Providers/context/BlogContext";
 import getAllBlogs from "@/utils/getAllBlogs";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
 import BlogItem from "./BlogItem";
 
 const BlogsList = () => {
@@ -15,15 +12,6 @@ const BlogsList = () => {
     refetchOnMount: "always",
     refetchInterval: 60000,
   });
-
-  const { setBlogData } = useContext(BlogContext);
-
-  useEffect(() => {
-    if (data) {
-      setBlogData(data);
-      console.log("blogData set");
-    }
-  }, [data]);
 
   return (
     <div>

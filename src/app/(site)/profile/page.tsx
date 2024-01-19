@@ -1,11 +1,10 @@
 "use client";
 
-import { BlogContext } from "@/Providers/context/BlogContext";
 import getAllBlogs from "@/utils/getAllBlogs";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ProfilePage() {
   const session = useSession();
@@ -23,18 +22,12 @@ export default function ProfilePage() {
     refetchInterval: 30000,
   });
 
-  const { blogData, setBlogData } = useContext(BlogContext);
-
   useEffect(() => {
-    if (blogData) {
-      const blogsByUser = filterArrayByUserId(blogData, userId);
-      setUserBlogs(blogsByUser);
-    } else if (data) {
+    if (data) {
       const blogsByUser = filterArrayByUserId(data, userId);
-      setBlogData(data);
       setUserBlogs(blogsByUser);
     }
-  }, [blogData, data, userId]);
+  }, [data, userId]);
 
   return (
     <div>
