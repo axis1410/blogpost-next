@@ -1,10 +1,11 @@
 import AuthProvider from "@/Providers/AuthProvider";
 import ReactQueryProvider from "@/Providers/ReactQueryProvider";
+import Navbar from "@/components/Navbar";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "500", "700", "800"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,10 +15,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <main>
           <ReactQueryProvider>
-            <AuthProvider>{children} </AuthProvider>
+            <AuthProvider>
+              <div>
+                <Navbar />
+              </div>
+              <div className="">{children}</div>
+            </AuthProvider>
           </ReactQueryProvider>
         </main>
       </body>

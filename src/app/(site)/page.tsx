@@ -21,21 +21,10 @@ export default async function HomePage() {
   }
 
   return (
-    <div>
-      HomePage
-      <br />
-      {JSON.stringify(session)}
-      <br />
+    <div className="mt-[78px]">
       <HydrationBoundary state={dehydrate(queryClient)}>
         <BlogsList />
       </HydrationBoundary>
-      <br />
-      <Link href="/profile">View profile</Link>
-      <br />
-      <Link href="/create-blog">Create blog</Link>
-      <br />
-      <LogoutButton />
-      <Link href="/api/auth/signin">Sign in</Link>
     </div>
   );
 }

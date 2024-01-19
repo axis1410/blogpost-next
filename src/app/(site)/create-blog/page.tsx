@@ -34,6 +34,10 @@ export default function CreateBlogPage() {
     }
   };
 
+  if (!session.data?.user) {
+    router.push("/auth/login");
+  }
+
   return (
     <>
       <div className="flex items-center justify-center min-h-screen">

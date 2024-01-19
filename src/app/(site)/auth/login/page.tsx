@@ -1,18 +1,19 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export default function LoginPage() {
-  const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>("");
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+
+  const session = useSession();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,6 +34,10 @@ export default function LoginPage() {
       .finally(() => setSubmitting(false));
   };
 
+  if (session) {
+    redirect("/");
+  }
+
   return (
     <>
       <div className="bg-grey-lighter min-h-screen flex flex-col">
@@ -42,7 +47,8 @@ export default function LoginPage() {
             <form onSubmit={handleLogin}>
               <input
                 type="text"
-                className="block border border-grey-light w-full p-3 rounded mb-4"
+                className="block border border-grey-light w-full p-3 rounded mb-4
+                disabled:cursor-not-allowed"
                 value={data.email}
                 disabled={submitting}
                 onChange={(e) => setData({ ...data, email: e.target.value })}
